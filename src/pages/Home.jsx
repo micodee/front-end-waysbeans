@@ -2,38 +2,9 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import Header from "../assets/img/header.png";
 import Logo from "../assets/img/icon2.png";
 import Waves from "../assets/img/Waves.png";
-import P1 from "../assets/img/product4.png";
-import P2 from "../assets/img/product1.png";
-import P3 from "../assets/img/product2.png";
-import P4 from "../assets/img/product3.png";
 import { useNavigate } from "react-router-dom";
+import data from "../assets/json/products.json"
 
-const data = [
-  {
-    image: P1,
-    title: "RWANDA Beans",
-    price: "299.900",
-    stock: "200"
-  },
-  {
-    image: P2,
-    title: "ETHIOPIA Beans",
-    price: "109.900",
-    stock: "99"
-  },
-  {
-    image: P3,
-    title: "GUETEMALA Beans",
-    price: "300.900",
-    stock: "500"
-  },
-  {
-    image: P4,
-    title: "NICARAGUA Beans",
-    price: "250.900",
-    stock: "352"
-  },
-];
 
 const Home = () => {
   const navigate = useNavigate();
@@ -63,15 +34,15 @@ const Home = () => {
           gap: "2rem",
         }}
       >
-        {data.map(({ image, title, price, stock }) => {
+        {data.map(( item,index ) => {
           return (
-            <Card style={{ padding: "0", cursor: 'pointer' }} onClick={() => navigate("/detail")}>
-              <Card.Img variant="top" src={image} />
+            <Card key={index} style={{ padding: "0", cursor: 'pointer' }} onClick={() => navigate(`/detail/${index}`)}>
+              <Card.Img variant="top" src={`/img/${item.image}`} />
               <Card.Body style={{ backgroundColor: "#F6E6DA" }}>
-                <Card.Title style={{ color: "#613D2B", fontWeight: "900", fontSize: "18px" }}>{title}</Card.Title>
+                <Card.Title style={{ color: "#613D2B", fontWeight: "900", fontSize: "18px" }}>{item.title}</Card.Title>
                 <Card.Text>
-                  <p style={{ margin: "0", padding: "0", color: "#974A4A", fontSize: "14px" }}>Rp.{price}</p>
-                  <p style={{ margin: "0", padding: "0", color: "#974A4A", fontSize: "14px" }}>Stock : {stock}</p>
+                  <p style={{ margin: "0", padding: "0", color: "#974A4A", fontSize: "14px" }}>Rp.{item.price}</p>
+                  <p style={{ margin: "0", padding: "0", color: "#974A4A", fontSize: "14px" }}>Stock : {item.stock}</p>
                 </Card.Text>
               </Card.Body>
             </Card>

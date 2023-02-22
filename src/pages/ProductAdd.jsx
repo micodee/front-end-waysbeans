@@ -1,5 +1,4 @@
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
-import ImgDetail from "../assets/img/product4.png";
 
 const ProductAdd = () => {
   return (
@@ -85,7 +84,7 @@ const ProductAdd = () => {
           </div>
         </Col>
         <Col className="header col-4 d-flex justify-content-end">
-          <img src={ImgDetail} alt="product" />
+          <img src={`/img/product4.png`} alt="product" />
         </Col>
       </Row>
     </Container>

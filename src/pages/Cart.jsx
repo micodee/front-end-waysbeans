@@ -1,8 +1,10 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
-import ImgP1 from "../assets/img/product4.png";
 import Crash from "../assets/img/crash.png";
+import { useState } from "react";
+import data from "../assets/json/products.json"
 
 const Cart = () => {
+  const [count, setCount] = useState(0);
   return (
     <Container className="detail col-9">
       <Row className="d-flex justify-content-between">
@@ -20,26 +22,28 @@ const Cart = () => {
         <Col className="header col-7 d-flex justify-content-center">
           <div className="col-12">
             <p>Review Your Order</p>
-            <hr style={{ height: "2px", backgroundColor: "black" }} />
-            <div className="d-flex justify-content-between align-items-center">
+            {data.map((item, index) => {
+              return (
+                <div key={index}>
+                  <hr style={{ height: "2px", backgroundColor: "black" }} />
+              <div className="d-flex justify-content-between align-items-center">
               <div className="d-flex gap-3 align-items-center">
                 <img
-                  src={ImgP1}
+                  src={`/img/${item.image}`}
                   alt="product"
                   height={80}
                   style={{ width: "80px" }}
                 />
                 <div>
                   <h6 style={{ fontWeight: "900", color: "#613D2B" }}>
-                    GUETEMALA Beans
+                    {item.title}
                   </h6>
                   <div className="d-flex align-items-center gap-2">
                     <span
-                      style={{
-                        cursor: "pointer",
-                        height: "3px",
-                        width: "8px",
-                        backgroundColor: "black",
+                      className="lessQty"
+                      onClick={() => {
+                        if (count === 0) return;
+                        setCount(count - 1);
                       }}
                     ></span>
                     <span
@@ -49,21 +53,17 @@ const Cart = () => {
                         borderRadius: "5px",
                       }}
                     >
-                      2
+                      {count}
                     </span>
                     <span
-                      style={{
-                        cursor: "pointer",
-                        height: "3px",
-                        width: "8px",
-                        backgroundColor: "black",
-                      }}
+                      className="addQty"
+                      onClick={() => setCount((count) => count + 1)}
                     ></span>
                   </div>
                 </div>
               </div>
               <div>
-                <p>Rp.300.900</p>
+                <p>Rp.{item.price}</p>
                 <div className="d-flex justify-content-end">
                   <img
                     src={Crash}
@@ -74,6 +74,10 @@ const Cart = () => {
                 </div>
               </div>
             </div>
+            </div>
+              )
+            })}
+
             <hr style={{ height: "2px", backgroundColor: "black" }} />
           </div>
         </Col>
@@ -86,7 +90,7 @@ const Cart = () => {
             </div>
             <div className="d-flex justify-content-between">
               <span>Qty</span>
-              <span>2</span>
+              <span>{count}</span>
             </div>
             <hr style={{ height: "2px", backgroundColor: "black" }} />
             <div className="d-flex justify-content-between">
@@ -94,16 +98,16 @@ const Cart = () => {
                 <b>Total</b>
               </p>
               <p>
-                <b>601.800</b>
+                <b>{count * 300900}</b>
               </p>
             </div>
             <div className="d-flex justify-content-end mt-4">
-            <Button
-              variant="secondary col-6"
-              style={{ backgroundColor: "#613D2B" }}
-            >
-              Pay
-            </Button>
+              <Button
+                variant="secondary col-6"
+                style={{ backgroundColor: "#613D2B" }}
+              >
+                Pay
+              </Button>
             </div>
           </div>
         </Col>

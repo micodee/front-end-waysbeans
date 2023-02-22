@@ -10,7 +10,6 @@ import {
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../assets/img/Icon.png";
-import Cart from "../assets/img/Cart.png";
 import Profile from "../assets/img/Profile.png";
 import iconLogout from "../assets/img/logout.png"
 import iconUser from "../assets/img/user.png"
@@ -37,14 +36,9 @@ const Header = () => {
             style={{ maxHeight: "100px" }}
             navbarScroll
           ></Nav>
-          {IsLogin ? (
+          {IsLogin === "admin" ? (
             <>
-              <Form className="d-flex align-items-center gap-5">
-                <img
-                  src={Cart}
-                  alt="icon"
-                  style={{ width: "35px", height: "32px", cursor: "pointer" }}
-                />
+              <Form className="d-flex align-items-center gap-3">
                 <Dropdown className="dropdown">
                   <Dropdown.Toggle className="profile">
                     <img
@@ -73,6 +67,38 @@ const Header = () => {
                       </Link>
                     </Dropdown.Item>
                     <Dropdown.Divider />
+                    <Dropdown.Item onClick={() => setIsLogin(false)} className="menu">
+                      <img src={iconLogout} alt="logout" />
+                      Logout
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </Form>
+            </>
+          ) : IsLogin === "cust" ? (
+            <>
+              <Form className="d-flex align-items-center gap-3">
+              <Link to="/cart">
+                <img
+                  src={`img/Cart.png`}
+                  alt="icon"
+                  style={{ width: "35px", height: "32px", cursor: "pointer" }}
+                />
+                </Link>
+                <Dropdown className="dropdown">
+                  <Dropdown.Toggle className="profile">
+                    <img
+                      src={Profile}
+                      alt="icon"
+                      style={{
+                        width: "60px",
+                        height: "60px",
+                        cursor: "pointer",
+                      }}
+                    />
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
                     <Dropdown.Item>
                       <Link to="/profile" className="menu">
                       <img src={iconUser} alt="user" />
@@ -99,7 +125,8 @@ const Header = () => {
                 </Button>
               </Form>
             </>
-          )}
+          )
+          }
         </Navbar.Collapse>
       </Container>
 

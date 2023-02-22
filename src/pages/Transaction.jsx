@@ -1,34 +1,8 @@
 import { Container, Row, Col } from "react-bootstrap";
 import ImgProfile from "../assets/img/profile1.png";
-import ImgP1 from "../assets/img/product1.png";
-import ImgP2 from "../assets/img/product2.png";
-import ImgP3 from "../assets/img/product3.png";
 import ImgWays from "../assets/img/icon3.png";
 import ImgQr from "../assets/img/qrcode.png";
-
-const transaction = [
- {
-   image: ImgP1,
-   title: "RWANDA Beans",
-   price: 299900,
-   qty: 2,
-   status: "Success" 
- },
- {
-   image: ImgP2,
-   title: "GUETEMALA Beans",
-   price: 240900,
-   qty: 4,
-   status: "Waiting Approve" 
- },
- {
-   image: ImgP3,
-   title: "ETHOPIA Beans",
-   price: 400900,
-   qty: 3,
-   status: "Complete" 
- },
-];
+import data from "../assets/json/transaction.json"
 
 const Transaction = () => {
   return (
@@ -77,9 +51,9 @@ const Transaction = () => {
             My Transaction
           </h2>
           <div className="d-flex flex-column gap-2">
-          {transaction.map(({ id, image, title, price, qty, status}) => {
+          {data.map((item, index) => {
            let style;
-           if (status === "Success") {
+           if (item.status === "Success") {
              style = {
                backgroundColor: "#e4e8c6",
                width: "112px",
@@ -87,7 +61,7 @@ const Transaction = () => {
                fontSize: "10px",
                color: "#78A85A"
              };
-           } else if (status === "Waiting Approve") {
+           } else if (item.status === "Waiting Approve") {
              style = {
                backgroundColor: "#f7dec4",
                width: "112px",
@@ -95,7 +69,7 @@ const Transaction = () => {
                fontSize: "10px",
                color: "#FF9900"
              };
-           } else if (status === "Complete") {
+           } else if (item.status === "Complete") {
              style = {
                backgroundColor: "#613d2b",
                width: "112px",
@@ -105,21 +79,21 @@ const Transaction = () => {
              };
            }
            return(
-            <div key={id} style={{ backgroundColor: "#F6E6DA", padding: "1rem 1.5rem" }} className="d-flex justify-content-between gap-3">
+            <div key={index} style={{ backgroundColor: "#F6E6DA", padding: "1rem 1.5rem" }} className="d-flex justify-content-between gap-3">
            <div style={{ display: "flex", gap: "1rem" }}>
-            <img src={image} alt="product" height={120} style={{ width: "80px" }} />
+            <img src={`/img/${item.image}`} alt="product" height={120} style={{ width: "80px" }} />
             <div className="d-flex justify-content-center flex-column">
-             <p className="mb-1" style={{ fontSize: "14px" }}><b>{title}</b></p>
+             <p className="mb-1" style={{ fontSize: "14px" }}><b>{item.title}</b></p>
              <span style={{ fontSize: "9px" }}><b>Saturday</b>, 5 March 2020</span>
-             <p className="mb-1" style={{ fontSize: "10px", fontWeight: "400", marginTop: "1rem" }}>Price : Rp.{price}</p>
-             <p className="mb-1" style={{ fontSize: "10px", fontWeight: "400", }}>Qty : {qty}</p>
-             <p className="mb-1" style={{ fontSize: "10px", fontWeight: "400", }}><b>Sub Total : {price*qty}</b></p>
+             <p className="mb-1" style={{ fontSize: "10px", fontWeight: "400", marginTop: "1rem" }}>Price : Rp.{item.price}</p>
+             <p className="mb-1" style={{ fontSize: "10px", fontWeight: "400", }}>Qty : {item.qty}</p>
+             <p className="mb-1" style={{ fontSize: "10px", fontWeight: "400", }}><b>Sub Total : {item.price*item.qty}</b></p>
             </div>
            </div>
            <div className="d-flex justify-content-center align-items-center flex-column col-3">
            <img src={ImgWays} alt="product" height={22} style={{ width: "73px" }} />
            <img src={ImgQr} alt="product" height={50} style={{ width: "50px", margin: ".7rem" }} />
-           <div style={style} className="d-flex justify-content-center align-items-center">{status}</div>
+           <div style={style} className="d-flex justify-content-center align-items-center">{item.status}</div>
            </div>
           </div>
            )
