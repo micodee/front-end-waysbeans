@@ -1,7 +1,7 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
 import ImgDetail from '../assets/img/product4.png'
 
-const Detail = () => {
+const ProductDetail = () => {
   return (
    <Container className="detail col-9">
    <Row className="d-flex justify-content-between">
@@ -26,4 +26,4 @@ const Detail = () => {
   )
 }
 
-export default Detail
+export default ProductDetail
