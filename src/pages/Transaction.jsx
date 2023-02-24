@@ -1,7 +1,4 @@
 import { Container, Row, Col } from "react-bootstrap";
-import ImgProfile from "../assets/img/profile1.png";
-import ImgWays from "../assets/img/icon3.png";
-import ImgQr from "../assets/img/qrcode.png";
 import data from "../assets/json/transaction.json"
 
 const Transaction = () => {
@@ -22,7 +19,7 @@ const Transaction = () => {
           </h2>
           <div className="d-flex">
             <img
-              src={ImgProfile}
+              src={`/img/profile.png`}
               alt="profle"
               style={{ width: "180px", marginRight: "1.5rem" }}
             />
@@ -91,8 +88,8 @@ const Transaction = () => {
             </div>
            </div>
            <div className="d-flex justify-content-center align-items-center flex-column col-3">
-           <img src={ImgWays} alt="product" height={22} style={{ width: "73px" }} />
-           <img src={ImgQr} alt="product" height={50} style={{ width: "50px", margin: ".7rem" }} />
+           <img src={`/img/profile-logo.png`} alt="product" height={22} style={{ width: "73px" }} />
+           <img src={`/img/profile-qrcode.png`} alt="product" height={50} style={{ width: "50px", margin: ".7rem" }} />
            <div style={style} className="d-flex justify-content-center align-items-center">{item.status}</div>
            </div>
           </div>

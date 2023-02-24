@@ -5,9 +5,10 @@ import { ModalLogin, ModalRegister, UserAdmin, UserCust } from "./Components";
 
 const Header = () => {
   const navigate = useNavigate();
-  const [login, setLogin] = useState(false);
-  const [register, setRegister] = useState(false);
-  const [IsLogin, setIsLogin] = useState(false);
+  const [showLogin, setModalLogin] = useState(false);
+  const [showRegister, setModalRegister] = useState(false);
+  const [IsUser, setIsUser] = useState(false);
+  const [IsAdmin, setIsAdmin] = useState(false);
   return (
     <Navbar className="nav shadow" expand="lg" fixed={"top"}>
       <Container>
@@ -24,21 +25,21 @@ const Header = () => {
             style={{ maxHeight: "100px" }}
             navbarScroll
           ></Nav>
-          {IsLogin === "admin" ? (
+          {IsAdmin ? (
             <>
-              <UserAdmin logout={() => setIsLogin(false)} />
+              <UserAdmin logout={() => setIsAdmin(false)} />
             </>
-          ) : IsLogin === "cust" ? (
+          ) : IsUser ? (
             <>
-              <UserCust logout={() => setIsLogin(false)} />
+              <UserCust logout={() => setIsUser(false)} />
             </>
           ) : (
             <>
               <Form className="d-flex gap-3">
-                <Button className="login" onClick={() => setLogin(true)}>
+                <Button className="login" onClick={() => setModalLogin(true)}>
                   Login
                 </Button>
-                <Button className="register" onClick={() => setRegister(true)}>
+                <Button className="register" onClick={() => setModalRegister(true)}>
                   Register
                 </Button>
               </Form>
@@ -48,17 +49,17 @@ const Header = () => {
       </Container>
 
       <ModalLogin
-        show={login}
-        onHide={() => setLogin(false)}
-        toRegister={() => [setLogin(false), setRegister(true)]}
-        toLogin={() => [setLogin(false), setIsLogin(true)]}
+        show={showLogin}
+        onHide={() => setModalLogin(false)}
+        toRegister={() => [setModalLogin(false), setModalRegister(true)]}
+        forLogin={() => [setModalLogin(false), setIsAdmin(true)]}
       />
 
       <ModalRegister
-        show={register}
-        onHide={() => setRegister(false)}
-        toLogin={() => [setRegister(false), setLogin(true)]}
-        toRegister={() => setRegister(false)}
+        show={showRegister}
+        onHide={() => setModalRegister(false)}
+        toLogin={() => [setModalRegister(false), setModalLogin(true)]}
+        toRegister={() => setModalRegister(false)}
       />
     </Navbar>
   );

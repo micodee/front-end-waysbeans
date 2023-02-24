@@ -1,7 +1,4 @@
 import { Container, Row, Col, Card } from "react-bootstrap";
-import Header from "../assets/img/header.png";
-import Logo from "../assets/img/icon2.png";
-import Waves from "../assets/img/Waves.png";
 import { useNavigate } from "react-router-dom";
 import data from "../assets/json/products.json"
 
@@ -13,7 +10,7 @@ const Home = () => {
       <Row>
         <Col className="header col-11">
           <div className="col-6">
-            <img src={Logo} alt="logo" className="logo" />
+            <img src={`/img/home-logo.png`} alt="logo" className="logo" />
             <h3 className="mt-2">BEST QUALITY COFFEE BEANS</h3>
             <p className="mt-4">
               Quality freshly roasted coffee made just for you. Pour, brew and
@@ -21,11 +18,11 @@ const Home = () => {
             </p>
           </div>
           <div>
-            <img src={Waves} alt="waves" className="waves" />
+            <img src={`/img/home-waves.png`} alt="waves" className="waves" />
           </div>
         </Col>
       </Row>
-      <img src={Header} alt="header" className="img" />
+      <img src={`/img/home-header.png`} alt="header" className="img" />
       <Row
         style={{
           marginTop: "2rem",

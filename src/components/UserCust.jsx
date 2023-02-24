@@ -1,17 +1,24 @@
 import React from "react";
-import { Form, Dropdown } from "react-bootstrap";
+import { Form, Dropdown, Badge } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const UserCust = (rest) => {
   return (
     <div>
       <Form className="d-flex align-items-center gap-3">
-        <Link to="/cart">
+        <Link to="/cart" className="position-relative">
           <img
             src={`img/nav-cart.png`}
             alt="icon"
             style={{ width: "35px", height: "32px", cursor: "pointer" }}
           />
+          <Badge
+            pill
+            bg="danger"
+            style={{ position: "absolute", top: 0, right: "-.5rem" }}
+          >
+            4
+          </Badge>
         </Link>
         <Dropdown className="dropdown">
           <Dropdown.Toggle className="profile">

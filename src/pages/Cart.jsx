@@ -1,10 +1,29 @@
+import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import Crash from "../assets/img/crash.png";
-import { useState } from "react";
 import data from "../assets/json/products.json"
+import ProductCart from "../components/ProductCart";
 
 const Cart = () => {
-  const [count, setCount] = useState(0);
+  const [qty, setQty] = React.useState(0);
+  const handleQty = (count) => {
+    setQty(qty + count );
+  };
+
+  const [total, setTotal] = React.useState(0);
+  const handleTotal = (count ,price) => {
+    setTotal(total + count * price );
+  };
+
+  const [dataProducts, setDataProducts] = React.useState([]);
+
+  React.useEffect(() => {
+    setDataProducts(data);
+  }, []);
+  const handleRemove = (id) => {
+    const newData = dataProducts.filter((item) => item.id !== id);
+    setDataProducts(newData);
+  };
+
   return (
     <Container className="detail col-9">
       <Row className="d-flex justify-content-between">
@@ -19,62 +38,12 @@ const Cart = () => {
         >
           My Cart
         </h2>
+        <p className="m-0 p-0">Review Your Order</p>
         <Col className="header col-7 d-flex justify-content-center">
           <div className="col-12">
-            <p>Review Your Order</p>
-            {data.map((item, index) => {
+            {dataProducts.map((item) => {
               return (
-                <div key={index}>
-                  <hr style={{ height: "2px", backgroundColor: "black" }} />
-              <div className="d-flex justify-content-between align-items-center">
-              <div className="d-flex gap-3 align-items-center">
-                <img
-                  src={`/img/${item.image}`}
-                  alt="product"
-                  height={80}
-                  style={{ width: "80px" }}
-                />
-                <div>
-                  <h6 style={{ fontWeight: "900", color: "#613D2B" }}>
-                    {item.title}
-                  </h6>
-                  <div className="d-flex align-items-center gap-2">
-                    <span
-                      className="lessQty"
-                      onClick={() => {
-                        if (count === 0) return;
-                        setCount(count - 1);
-                      }}
-                    ></span>
-                    <span
-                      style={{
-                        backgroundColor: "#F6E6DA",
-                        padding: "0rem .75rem",
-                        borderRadius: "5px",
-                      }}
-                    >
-                      {count}
-                    </span>
-                    <span
-                      className="addQty"
-                      onClick={() => setCount((count) => count + 1)}
-                    ></span>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <p>Rp.{item.price}</p>
-                <div className="d-flex justify-content-end">
-                  <img
-                    src={Crash}
-                    alt="crash"
-                    height={20}
-                    style={{ width: "17px", cursor: "pointer" }}
-                  />
-                </div>
-              </div>
-            </div>
-            </div>
+                <ProductCart key={item.id} product={item} handleQty={handleQty} handleTotal={handleTotal} handleRemove={handleRemove}/>
               )
             })}
 
@@ -86,11 +55,11 @@ const Cart = () => {
             <hr style={{ height: "2px", backgroundColor: "black" }} />
             <div className="d-flex justify-content-between">
               <p>Subtotal</p>
-              <p>300.900</p>
+              <p>{total}</p>
             </div>
             <div className="d-flex justify-content-between">
               <span>Qty</span>
-              <span>{count}</span>
+              <span>{qty}</span>
             </div>
             <hr style={{ height: "2px", backgroundColor: "black" }} />
             <div className="d-flex justify-content-between">
@@ -98,7 +67,7 @@ const Cart = () => {
                 <b>Total</b>
               </p>
               <p>
-                <b>{count * 300900}</b>
+                <b>{total}</b>
               </p>
             </div>
             <div className="d-flex justify-content-end mt-4">

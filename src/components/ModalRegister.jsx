@@ -20,6 +20,7 @@ const ModalRegister = (rest) => {
                   backgroundColor: "#613D2B40",
                   border: "2px solid #613D2B",
                 }}
+                required
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -30,6 +31,7 @@ const ModalRegister = (rest) => {
                   backgroundColor: "#613D2B40",
                   border: "2px solid #613D2B",
                 }}
+                required
               />
             </Form.Group>
             <Form.Group className="mb-4" controlId="exampleForm.ControlInput1">
@@ -40,6 +42,7 @@ const ModalRegister = (rest) => {
                   backgroundColor: "#613D2B40",
                   border: "2px solid #613D2B",
                 }}
+                required
               />
             </Form.Group>
             <Button
