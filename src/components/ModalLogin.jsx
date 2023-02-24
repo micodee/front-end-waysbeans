@@ -4,6 +4,7 @@ import { Button, Form, Modal } from "react-bootstrap";
 const ModalLogin = (rest) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -14,7 +15,29 @@ const ModalLogin = (rest) => {
   };
 
   const handleLogin = () => {
-    rest.forLogin(email, password);
+    if (email === "admin@gmail.com" && password === "admin") {
+      // kondisi login admin
+      if (email === "admin@gmail.com" && password === "admin") {
+        rest.onHide();
+        rest.setIsAdmin(true);
+        rest.linkToAdmin()
+        setEmail("")
+        setPassword("")
+      } else {
+        setErrorMessage("Invalid email or password");
+      }
+    } else {
+      // kondisi login user
+      if (email === "user@gmail.com" && password === "user") {
+        rest.onHide();
+        rest.setIsUser(true);
+        rest.linkToUser()
+        setEmail("")
+        setPassword("")
+      } else {
+        setErrorMessage("Invalid email or password");
+      }
+    }
   };
 
   return (
@@ -58,6 +81,11 @@ const ModalLogin = (rest) => {
             >
               Login
             </Button>
+            {errorMessage && (
+              <p style={{ color: "red", textAlign: "center" }}>
+                {errorMessage}
+              </p>
+            )}
             <p style={{ textAlign: "center", fontSize: ".9rem" }}>
               Don't have an account ?{" "}
               <span

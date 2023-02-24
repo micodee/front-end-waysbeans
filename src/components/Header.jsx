@@ -27,11 +27,11 @@ const Header = () => {
           ></Nav>
           {IsAdmin ? (
             <>
-              <UserAdmin logout={() => setIsAdmin(false)} />
+              <UserAdmin logout={() => [setIsAdmin(false), navigate("/")]} />
             </>
           ) : IsUser ? (
             <>
-              <UserCust logout={() => setIsUser(false)} />
+              <UserCust logout={() => [setIsUser(false), navigate("/")]}/>
             </>
           ) : (
             <>
@@ -39,7 +39,10 @@ const Header = () => {
                 <Button className="login" onClick={() => setModalLogin(true)}>
                   Login
                 </Button>
-                <Button className="register" onClick={() => setModalRegister(true)}>
+                <Button
+                  className="register"
+                  onClick={() => setModalRegister(true)}
+                >
                   Register
                 </Button>
               </Form>
@@ -52,7 +55,10 @@ const Header = () => {
         show={showLogin}
         onHide={() => setModalLogin(false)}
         toRegister={() => [setModalLogin(false), setModalRegister(true)]}
-        forLogin={() => [setModalLogin(false), setIsAdmin(true)]}
+        setIsAdmin={setIsAdmin}
+        linkToUser={() => navigate("/profile")}
+        linkToAdmin={() => navigate("/list-product")}
+        setIsUser={setIsUser}
       />
 
       <ModalRegister

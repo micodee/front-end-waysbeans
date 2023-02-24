@@ -1,10 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 
-const ModalRegister = (rest) => {
+const ModalRegister = (props) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [fullName, setFullName] = useState("");
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const handleFullNameChange = (event) => {
+    setFullName(event.target.value);
+  };
+
+  const handleRegisterClick = () => {
+    const userData = {
+      email: email,
+      password: password,
+      fullName: fullName,
+    };
+    localStorage.setItem("userData", JSON.stringify(userData));
+    props.toLogin();
+    props.onHide();
+  };
+
+  const handleLoginClick = () => {
+    props.toLogin();
+    props.onHide();
+    setEmail('')
+    setPassword('')
+    setFullName('')
+  };
+
+  const userData = JSON.parse(localStorage.getItem("userData"));
+  console.log(userData);
+
   return (
     <div>
-      <Modal {...rest} centered size="sm">
+      <Modal {...props} centered size="sm">
         <Modal.Header closeButton>
           <Modal.Title style={{ color: "#613D2B", fontWeight: "900" }}>
             Register
@@ -12,7 +50,7 @@ const ModalRegister = (rest) => {
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Group className="mb-3" controlId="email">
               <Form.Control
                 type="email"
                 placeholder="Email"
@@ -21,9 +59,11 @@ const ModalRegister = (rest) => {
                   border: "2px solid #613D2B",
                 }}
                 required
+                value={email}
+                onChange={handleEmailChange}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Group className="mb-3" controlId="password">
               <Form.Control
                 type="password"
                 placeholder="Password"
@@ -32,9 +72,11 @@ const ModalRegister = (rest) => {
                   border: "2px solid #613D2B",
                 }}
                 required
+                value={password}
+                onChange={handlePasswordChange}
               />
             </Form.Group>
-            <Form.Group className="mb-4" controlId="exampleForm.ControlInput1">
+            <Form.Group className="mb-4" controlId="fullName">
               <Form.Control
                 type="text"
                 placeholder="Full Name"
@@ -43,21 +85,20 @@ const ModalRegister = (rest) => {
                   border: "2px solid #613D2B",
                 }}
                 required
+                value={fullName}
+                onChange={handleFullNameChange}
               />
             </Form.Group>
             <Button
               variant="secondary col-12 mb-3"
-              onClick={rest.toRegister}
+              onClick={handleRegisterClick}
               style={{ backgroundColor: "#613D2B" }}
             >
               Register
             </Button>
             <p style={{ textAlign: "center", fontSize: ".9rem" }}>
               Already have an account ?{" "}
-              <span
-                onClick={rest.toLogin}
-                style={{ cursor: "pointer" }}
-              >
+              <span onClick={handleLoginClick} style={{ cursor: "pointer" }}>
                 Klik <b>Here</b>
               </span>
             </p>
