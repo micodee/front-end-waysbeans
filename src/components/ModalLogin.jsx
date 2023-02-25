@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 
 const ModalLogin = (rest) => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
+  }
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -49,7 +53,7 @@ const ModalLogin = (rest) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Control
                 type="email"
@@ -77,6 +81,7 @@ const ModalLogin = (rest) => {
             <Button
               variant="secondary col-12 mb-3"
               onClick={handleLogin}
+              type="submit"
               style={{ backgroundColor: "#613D2B" }}
             >
               Login
