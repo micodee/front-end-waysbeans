@@ -78,7 +78,7 @@ const Transaction = () => {
            return(
             <div key={index} style={{ backgroundColor: "#F6E6DA", padding: "1rem 1.5rem" }} className="d-flex justify-content-between gap-3">
            <div style={{ display: "flex", gap: "1rem" }}>
-            <img src={`/img/${item.image}`} alt="product" height={120} style={{ width: "80px" }} />
+            <img src={item.image} alt="product" height={120} style={{ width: "80px" }} />
             <div className="d-flex justify-content-center flex-column">
              <p className="mb-1" style={{ fontSize: "14px" }}><b>{item.title}</b></p>
              <span style={{ fontSize: "9px" }}><b>Saturday</b>, 5 March 2020</span>
