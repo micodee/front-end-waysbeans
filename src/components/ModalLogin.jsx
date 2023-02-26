@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 
-const ModalLogin = (rest) => {
+const ModalLogin = (props) => {
+  const {showModal, hideModal, toRegister} = props
+  // agar submit tidak merefresh
   const handleSubmit = (e) => {
     e.preventDefault()
   }
@@ -22,9 +24,9 @@ const ModalLogin = (rest) => {
     if (email === "admin@gmail.com" && password === "admin") {
       // kondisi login admin
       if (email === "admin@gmail.com" && password === "admin") {
-        rest.onHide();
-        rest.setIsAdmin(true);
-        rest.linkToAdmin()
+        hideModal();
+        props.setIsAdmin(true);
+        props.linkToAdmin()
         setEmail("")
         setPassword("")
       } else {
@@ -33,9 +35,9 @@ const ModalLogin = (rest) => {
     } else {
       // kondisi login user
       if (email === "user@gmail.com" && password === "user") {
-        rest.onHide();
-        rest.setIsUser(true);
-        rest.linkToUser()
+        hideModal();
+        props.setIsUser(true);
+        props.linkToUser()
         setEmail("")
         setPassword("")
       } else {
@@ -46,7 +48,7 @@ const ModalLogin = (rest) => {
 
   return (
     <div>
-      <Modal {...rest} centered size="sm">
+      <Modal show={showModal} onHide={hideModal} centered size="sm">
         <Modal.Header closeButton>
           <Modal.Title style={{ color: "#613D2B", fontWeight: "900" }}>
             Login
@@ -54,36 +56,13 @@ const ModalLogin = (rest) => {
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Control
-                type="email"
-                placeholder="Email"
-                style={{
-                  backgroundColor: "#613D2B40",
-                  border: "2px solid #613D2B",
-                }}
-                value={email}
-                onChange={handleEmailChange}
-              />
+            <Form.Group className="mb-3">
+              <Form.Control type="email" placeholder="Email" className="formInput" value={email} onChange={handleEmailChange} />
             </Form.Group>
-            <Form.Group className="mb-4" controlId="exampleForm.ControlInput1">
-              <Form.Control
-                type="password"
-                placeholder="Password"
-                style={{
-                  backgroundColor: "#613D2B40",
-                  border: "2px solid #613D2B",
-                }}
-                value={password}
-                onChange={handlePasswordChange}
-              />
+            <Form.Group className="mb-4">
+              <Form.Control type="password" placeholder="Password" className="formInput" value={password} onChange={handlePasswordChange} />
             </Form.Group>
-            <Button
-              variant="secondary col-12 mb-3"
-              onClick={handleLogin}
-              type="submit"
-              style={{ backgroundColor: "#613D2B" }}
-            >
+            <Button variant="secondary col-12 mb-3" onClick={handleLogin} type="submit" style={{ backgroundColor: "#613D2B" }}>
               Login
             </Button>
             {errorMessage && (
@@ -94,7 +73,7 @@ const ModalLogin = (rest) => {
             <p style={{ textAlign: "center", fontSize: ".9rem" }}>
               Don't have an account ?{" "}
               <span
-                onClick={rest.toRegister}
+                onClick={toRegister}
                 style={{ cursor: "pointer" }}
               >
                 Klik <b>Here</b>

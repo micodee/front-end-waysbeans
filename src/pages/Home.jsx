@@ -1,9 +1,9 @@
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import data from "../assets/json/products.json"
 
 
-const Home = () => {
+const Home = (props) => {
+  const { Products } = props
   const navigate = useNavigate();
   return (
     <Container className="home col-9">
@@ -31,10 +31,10 @@ const Home = () => {
           gap: "2rem",
         }}
       >
-        {data.map(( item,index ) => {
+        {Products.map(( item ) => {
           return (
-            <Card key={index} style={{ padding: "0", cursor: 'pointer' }} onClick={() => navigate(`/detail/${index}`)}>
-              <Card.Img variant="top" src={`/img/${item.image}`} />
+            <Card key={item.id} style={{ padding: "0", cursor: 'pointer' }} onClick={() => navigate(`/detail/${item.id}`)}>
+              <Card.Img variant="top" src={item.image} style={{ width: "100%", height: "320px", objectFit: "cover" }} />
               <Card.Body style={{ backgroundColor: "#F6E6DA" }}>
                 <Card.Title style={{ color: "#613D2B", fontWeight: "900", fontSize: "18px" }}>{item.title}</Card.Title>
                 <Card.Text>

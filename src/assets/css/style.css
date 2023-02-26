@@ -61,6 +61,15 @@
   border: none;
 }
 
+.formInput {
+  background-color: rgba(97, 61, 43, 0.2509803922);
+  border: 2px solid #613d2b;
+}
+
+.btnModal {
+  background-color: #613d2b;
+}
+
 .home .header {
   background-color: #DBB699;
   padding: 3.5rem 3.5rem 8rem;

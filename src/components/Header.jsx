@@ -20,11 +20,7 @@ const Header = () => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: "100px" }}
-            navbarScroll
-          ></Nav>
+          <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: "100px" }} navbarScroll></Nav>
           {IsAdmin ? (
             <>
               <UserAdmin logout={() => [setIsAdmin(false), navigate("/")]} />
@@ -52,20 +48,21 @@ const Header = () => {
       </Container>
 
       <ModalLogin
-        show={showLogin}
-        onHide={() => setModalLogin(false)}
+        showModal={showLogin}
+        hideModal={() => setModalLogin(false)}
         toRegister={() => [setModalLogin(false), setModalRegister(true)]}
         setIsAdmin={setIsAdmin}
+        setIsUser={setIsUser}
         linkToUser={() => navigate("/profile")}
         linkToAdmin={() => navigate("/list-product")}
-        setIsUser={setIsUser}
       />
 
       <ModalRegister
-        show={showRegister}
-        onHide={() => setModalRegister(false)}
+        showModal={showRegister}
+        hideModal={() => setModalRegister(false)}
         toLogin={() => [setModalRegister(false), setModalLogin(true)]}
-        toRegister={() => setModalRegister(false)}
+        IsUser={IsUser}
+        setIsUser={setIsUser}
       />
     </Navbar>
   );

@@ -1,6 +1,26 @@
+import React, { useState } from "react";
 import { Container, Row, Col, Table, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
-const ListProduct = () => {
+const ListProduct = (props) => {
+  const navigate = useNavigate()
+  const { Products, SetProducts } = props
+  const [List, SetList] = useState(Products)
+
+  function deleteProduct(id) {
+    const updateProduct = List.filter(item => item.id !== id)
+    SetList(updateProduct)
+    SetProducts(updateProduct)
+  }
+
+  function updateProduct(id) {
+    let Product = Products.filter(Product => Product.id === id);
+    Product = Product[0];
+    props.setformUpdateProduct(Product);
+    navigate(`/product-update/${id}`);
+  }
+  console.log(updateProduct);
+
   return (
     <Container className="detail col-9">
       <Row className="d-flex justify-content-between">
@@ -29,42 +49,24 @@ const ListProduct = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td style={{ verticalAlign: "middle" }}>1</td>
-                <td></td>
-                <td style={{ verticalAlign: "middle" }}>RWANDA Beans</td>
-                <td className="text-center" style={{ verticalAlign: "middle" }}>120</td>
-                <td className="text-center" style={{ verticalAlign: "middle" }}>150000</td>
-                <td></td>
-                <td className="d-flex justify-content-evenly align-content-center gap-2"><Button variant="danger">Delete</Button><Button variant="success">Update</Button></td>
-              </tr>
-              <tr>
-                <td style={{ verticalAlign: "middle" }}>2</td>
-                <td></td>
-                <td style={{ verticalAlign: "middle" }}>ETHIOPIA Beans</td>
-                <td className="text-center" style={{ verticalAlign: "middle" }}>11</td>
-                <td className="text-center" style={{ verticalAlign: "middle" }}>450000</td>
-                <td></td>
-                <td className="d-flex justify-content-evenly align-content-center gap-2"><Button variant="danger">Delete</Button><Button variant="success">Update</Button></td>
-              </tr>
-              <tr>
-              <td style={{ verticalAlign: "middle" }}>3</td>
-                <td></td>
-                <td style={{ verticalAlign: "middle" }}>GUETEMALA Beans</td>
-                <td className="text-center" style={{ verticalAlign: "middle" }}>23</td>
-                <td className="text-center" style={{ verticalAlign: "middle" }}>230000</td>
-                <td></td>
-                <td className="d-flex justify-content-evenly align-content-center gap-2"><Button variant="danger">Delete</Button><Button variant="success">Update</Button></td>
-              </tr>
-              <tr>
-              <td style={{ verticalAlign: "middle" }}>4</td>
-                <td></td>
-                <td style={{ verticalAlign: "middle" }}>NICARAGUA Beans</td>
-                <td className="text-center" style={{ verticalAlign: "middle" }}>46</td>
-                <td className="text-center" style={{ verticalAlign: "middle" }}>220000</td>
-                <td></td>
-                <td className="d-flex justify-content-evenly align-content-center gap-2"><Button variant="danger">Delete</Button><Button variant="success">Update</Button></td>
-              </tr>
+              {List.map((item, index) => {
+                return (
+                  <tr key={item.id}>
+                    <td style={{ verticalAlign: "middle" }}>{index + 1}</td>
+                    <td style={{ verticalAlign: "middle" }}><img src={item.image} alt={item.title} style={{ width: "35px", height: "40px", objectFit: "cover" }} /></td>
+                    <td style={{ verticalAlign: "middle" }}>{item.title}</td>
+                    <td className="text-center" style={{ verticalAlign: "middle" }}>{item.stock}</td>
+                    <td className="text-center" style={{ verticalAlign: "middle" }}>{item.price}</td>
+                    <td style={{ verticalAlign: "middle" }}>{item.description}</td>
+                    <td style={{ verticalAlign: "middle" }}>
+                      <div className="d-flex justify-content-evenly align-items-center gap-2">
+                      <Button onClick={() => deleteProduct(item.id)} variant="danger">Delete</Button>
+                      <Button onClick={() => updateProduct(item.id)} variant="success">Update</Button>
+                      </div>
+                    </td>
+                  </tr>
+                )
+              })}
             </tbody>
           </Table>
         </Col>
