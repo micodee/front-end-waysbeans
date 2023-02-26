@@ -25,7 +25,7 @@ const ProductCart = (props) => {
       <div className="d-flex justify-content-between align-items-center">
         <div className="d-flex gap-3 align-items-center">
           <img
-            src={`/img/${props.product.image}`}
+            src={props.product.image}
             alt="product"
             height={80}
             style={{ width: "80px" }}

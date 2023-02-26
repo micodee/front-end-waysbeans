@@ -53,7 +53,7 @@ const ListProduct = (props) => {
                 return (
                   <tr key={item.id}>
                     <td style={{ verticalAlign: "middle" }}>{index + 1}</td>
-                    <td style={{ verticalAlign: "middle" }}><img src={item.image} alt={item.title} style={{ width: "35px", height: "40px", objectFit: "cover" }} /></td>
+                    <td style={{ verticalAlign: "middle" }}><img src={item.image} alt={item.title} style={{ width: "100px", height: "130px", objectFit: "cover" }} /></td>
                     <td style={{ verticalAlign: "middle" }}>{item.title}</td>
                     <td className="text-center" style={{ verticalAlign: "middle" }}>{item.stock}</td>
                     <td className="text-center" style={{ verticalAlign: "middle" }}>{item.price}</td>

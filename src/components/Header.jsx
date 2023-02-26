@@ -54,7 +54,7 @@ const Header = () => {
         setIsAdmin={setIsAdmin}
         setIsUser={setIsUser}
         linkToUser={() => navigate("/profile")}
-        linkToAdmin={() => navigate("/list-product")}
+        linkToAdmin={() => navigate("/list-income")}
       />
 
       <ModalRegister

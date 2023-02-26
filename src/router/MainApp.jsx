@@ -26,7 +26,7 @@ const MainApp = () => {
           <Route path="/detail/:id" element={<ProductDetail Products={Products} />} />
 
           <Route path="/" element={<PrivateRoute/>}>
-            <Route path="/cart" element={<Cart />} />
+            <Route path="/cart" element={<Cart Products={Products} />} />
             <Route path="/profile" element={<Transaction />} />
             <Route path="/add" element={<ProductAdd Products={Products} SetProducts={SetProducts} />} />
             <Route path="/product-update/:id" element={<ProductUpdate Products={Products} SetProducts={SetProducts} formUpdateProduct={formUpdateProduct} setformUpdateProduct={setformUpdateProduct} />} />

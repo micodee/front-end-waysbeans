@@ -1,22 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import data from "../assets/json/products.json"
 import ProductCart from "../components/ProductCart";
 
 const Cart = () => {
-  const [qty, setQty] = React.useState(0);
+  const [qty, setQty] = useState(0);
   const handleQty = (count) => {
     setQty(qty + count );
   };
 
-  const [total, setTotal] = React.useState(0);
+  const [total, setTotal] = useState(0);
   const handleTotal = (count ,price) => {
     setTotal(total + count * price );
   };
 
-  const [dataProducts, setDataProducts] = React.useState([]);
+  const [dataProducts, setDataProducts] = useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setDataProducts(data);
   }, []);
   const handleRemove = (id) => {
