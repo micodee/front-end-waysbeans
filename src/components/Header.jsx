@@ -3,12 +3,11 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ModalLogin, ModalRegister, UserAdmin, UserCust } from "./Components";
 
-const Header = () => {
+const Header = (props) => {
+  const { IsAdmin, setIsAdmin, IsUser, setIsUser } = props
   const navigate = useNavigate();
   const [showLogin, setModalLogin] = useState(false);
   const [showRegister, setModalRegister] = useState(false);
-  const [IsUser, setIsUser] = useState(false);
-  const [IsAdmin, setIsAdmin] = useState(false);
   return (
     <Navbar className="nav shadow" expand="lg" fixed={"top"}>
       <Container>

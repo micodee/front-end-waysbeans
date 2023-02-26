@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 const ProductCart = (props) => {
   const { handleQty, handleTotal, handleRemove } = props;
-  const [count, setCount] = React.useState(0);
+  const [count, setCount] = useState(0);
 
   const handleAdd = () => {
     setCount(count + 1);

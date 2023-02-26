@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import data from "../assets/json/products.json"
+import data from "../assets/json/products.json";
 import ProductCart from "../components/ProductCart";
 
 const Cart = () => {
   const [qty, setQty] = useState(0);
   const handleQty = (count) => {
-    setQty(qty + count );
+    setQty(qty + count);
   };
 
   const [total, setTotal] = useState(0);
-  const handleTotal = (count ,price) => {
-    setTotal(total + count * price );
+  const handleTotal = (count, price) => {
+    setTotal(total + count * price);
   };
 
   const [dataProducts, setDataProducts] = useState([]);
@@ -43,8 +43,14 @@ const Cart = () => {
           <div className="col-12">
             {dataProducts.map((item) => {
               return (
-                <ProductCart key={item.id} product={item} handleQty={handleQty} handleTotal={handleTotal} handleRemove={handleRemove}/>
-              )
+                <ProductCart
+                  key={item.id}
+                  product={item}
+                  handleQty={handleQty}
+                  handleTotal={handleTotal}
+                  handleRemove={handleRemove}
+                />
+              );
             })}
 
             <hr style={{ height: "2px", backgroundColor: "black" }} />
