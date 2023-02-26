@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ModalLogin, ModalRegister, UserAdmin, UserCust } from "./Components";
 
 const Header = (props) => {
-  const { IsAdmin, setIsAdmin, IsUser, setIsUser } = props
+  const { IsAdmin, setIsAdmin, IsUser, setIsUser, cart } = props
   const navigate = useNavigate();
   const [showLogin, setModalLogin] = useState(false);
   const [showRegister, setModalRegister] = useState(false);
@@ -26,7 +26,7 @@ const Header = (props) => {
             </>
           ) : IsUser ? (
             <>
-              <UserCust logout={() => [setIsUser(false), navigate("/")]}/>
+              <UserCust logout={() => [setIsUser(false), navigate("/")]} cart={cart}/>
             </>
           ) : (
             <>

@@ -3,6 +3,7 @@ import { Form, Dropdown, Badge } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const UserCust = (rest) => {
+  const { cart } = rest
   return (
     <div>
       <Form className="d-flex align-items-center gap-3">
@@ -17,7 +18,7 @@ const UserCust = (rest) => {
             bg="danger"
             style={{ position: "absolute", top: 0, right: "-.5rem" }}
           >
-            4
+            {cart}
           </Badge>
         </Link>
         <Dropdown className="dropdown">

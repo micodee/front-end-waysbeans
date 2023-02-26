@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import data from "../assets/json/products.json";
 import ProductCart from "../components/ProductCart";
 
-const Cart = () => {
-  const [qty, setQty] = useState(0);
+const Cart = (props) => {
+  const { Products, SetProducts, cart, setCart } = props
+
   const handleQty = (count) => {
-    setQty(qty + count);
+    setCart(cart + count);
   };
 
   const [total, setTotal] = useState(0);
@@ -14,14 +14,9 @@ const Cart = () => {
     setTotal(total + count * price);
   };
 
-  const [dataProducts, setDataProducts] = useState([]);
-
-  useEffect(() => {
-    setDataProducts(data);
-  }, []);
   const handleRemove = (id) => {
-    const newData = dataProducts.filter((item) => item.id !== id);
-    setDataProducts(newData);
+    const newData = Products.filter((item) => item.id !== id);
+    SetProducts(newData);
   };
 
   return (
@@ -41,7 +36,7 @@ const Cart = () => {
         <p className="m-0 p-0">Review Your Order</p>
         <Col className="header col-7 d-flex justify-content-center">
           <div className="col-12">
-            {dataProducts.map((item) => {
+            {Products.map((item) => {
               return (
                 <ProductCart
                   key={item.id}
@@ -65,7 +60,7 @@ const Cart = () => {
             </div>
             <div className="d-flex justify-content-between">
               <span>Qty</span>
-              <span>{qty}</span>
+              <span>{cart}</span>
             </div>
             <hr style={{ height: "2px", backgroundColor: "black" }} />
             <div className="d-flex justify-content-between">
