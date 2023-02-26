@@ -2,49 +2,45 @@ import React, { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 
 const ModalLogin = (props) => {
-  const {showModal, hideModal, toRegister} = props
+  const {showModal, hideModal, toRegister, Users, setIsUser} = props
   // agar submit tidak merefresh
-  const handleSubmit = (e) => {
-    e.preventDefault()
-  }
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
+  const [formLogin, setFormLogin] = useState({
+    email: "",
+    password: ""
+  });
+  const formLoginOnChange = (e) => {
+    setFormLogin({
+      ...formLogin,
+      [e.target.name]: e.target.value,
+    });
   };
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const handleLogin = () => {
-    if (email === "admin@gmail.com" && password === "admin") {
-      // kondisi login admin
-      if (email === "admin@gmail.com" && password === "admin") {
-        hideModal();
-        props.setIsAdmin(true);
-        props.linkToAdmin()
-        setEmail("")
-        setPassword("")
-      } else {
-        setErrorMessage("Invalid email or password");
-      }
-    } else {
-      // kondisi login user
-      if (email === "user@gmail.com" && password === "user") {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (Users.some(user => user.email === formLogin.email)) {
+      let User = Users.filter(User => User.email === formLogin.email);
+      User = User[0];
+      if (User.password === formLogin.password) {
         hideModal();
         props.setIsUser(true);
         props.linkToUser()
-        setEmail("")
-        setPassword("")
-      } else {
-        setErrorMessage("Invalid email or password");
+      }
+      else {
+        setIsUser(false);
+        setErrorMessage("Invalid email or password")
       }
     }
-  };
+    else {
+      setIsUser(false);
+    }
+
+    setFormLogin((formLogin) => ({
+      ...formLogin,
+      email: "",
+      password: ""
+    }));
+  }
+
 
   return (
     <div>
@@ -57,12 +53,12 @@ const ModalLogin = (props) => {
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
-              <Form.Control type="email" placeholder="Email" className="formInput" value={email} onChange={handleEmailChange} />
+              <Form.Control type="email" placeholder="Email" name="email" className="formInput" value={formLogin.email} onChange={formLoginOnChange} />
             </Form.Group>
             <Form.Group className="mb-4">
-              <Form.Control type="password" placeholder="Password" className="formInput" value={password} onChange={handlePasswordChange} />
+              <Form.Control type="password" placeholder="Password" name="password" className="formInput" value={formLogin.password} onChange={formLoginOnChange} />
             </Form.Group>
-            <Button variant="secondary col-12 mb-3" onClick={handleLogin} type="submit" style={{ backgroundColor: "#613D2B" }}>
+            <Button variant="secondary col-12 mb-3" type="submit" style={{ backgroundColor: "#613D2B" }}>
               Login
             </Button>
             {errorMessage && (

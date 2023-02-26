@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 
 const ModalRegister = (props) => {
-  const { toLogin, showModal, hideModal, IsUser, setIsUser } = props
+  const { toLogin, showModal, hideModal, Users, SetUsers } = props
 
   const [formRegister, setFormRegister] = useState({
     id:0,
+    isAdmin: false,
     name: "",
     email: "",
     password: "",
+    cart: [],
   });
   const registerOnChange = (e) => {
     setFormRegister({
@@ -19,15 +21,15 @@ const ModalRegister = (props) => {
 
   const registerOnSubmit = (e) => {
     e.preventDefault();
-    const lastUserId = IsUser[IsUser.length - 1].id;
+    const lastUserId = Users[Users.length - 1].id;
     const autoId = lastUserId + 1;
     const newUserWithAutoId = {
       ...formRegister,
       id: autoId,
     };
-    const updatedUsers = [...IsUser];
+    const updatedUsers = [...Users];
     updatedUsers.push(newUserWithAutoId);
-    setIsUser(updatedUsers);
+    SetUsers(updatedUsers);
 
     setFormRegister((formRegister) => ({
       ...formRegister,
@@ -35,7 +37,6 @@ const ModalRegister = (props) => {
       email: "",
       password: "",
     }));
-
     toLogin()
   };
 

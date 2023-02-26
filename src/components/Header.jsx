@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { ModalLogin, ModalRegister, UserAdmin, UserCust } from "./Components";
 
 const Header = (props) => {
-  const { IsAdmin, setIsAdmin, IsUser, setIsUser, cart } = props
   const navigate = useNavigate();
+  const { IsAdmin, setIsAdmin, IsUser, setIsUser, cart, Users, SetUsers } = props
   const [showLogin, setModalLogin] = useState(false);
   const [showRegister, setModalRegister] = useState(false);
   return (
@@ -54,14 +54,16 @@ const Header = (props) => {
         setIsUser={setIsUser}
         linkToUser={() => navigate("/profile")}
         linkToAdmin={() => navigate("/list-income")}
+        Users={Users}
+        SetUsers={SetUsers}
       />
 
       <ModalRegister
         showModal={showRegister}
         hideModal={() => setModalRegister(false)}
         toLogin={() => [setModalRegister(false), setModalLogin(true)]}
-        IsUser={IsUser}
-        setIsUser={setIsUser}
+        Users={Users}
+        SetUsers={SetUsers}
       />
     </Navbar>
   );
