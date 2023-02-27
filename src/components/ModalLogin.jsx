@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 
 const ModalLogin = (props) => {
-  const {showModal, hideModal, toRegister, Users, setIsUser} = props
+  const {showModal, hideModal, toRegister, Users} = props
   // agar submit tidak merefresh
   const [errorMessage, setErrorMessage] = useState("");
   const [formLogin, setFormLogin] = useState({
@@ -22,16 +22,14 @@ const ModalLogin = (props) => {
       User = User[0];
       if (User.password === formLogin.password) {
         hideModal();
-        props.setIsUser(true);
-        props.linkToUser()
+        props.setIsUser(true)
+        props.setIsAdmin(User.isAdmin)
+        props.linkToAdmin()
+      } else {
+        setErrorMessage("Invalid password")
       }
-      else {
-        setIsUser(false);
-        setErrorMessage("Invalid email or password")
-      }
-    }
-    else {
-      setIsUser(false);
+    } else {
+      setErrorMessage("Invalid email")
     }
 
     setFormLogin((formLogin) => ({

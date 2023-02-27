@@ -22,7 +22,7 @@ const Header = (props) => {
           <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: "100px" }} navbarScroll></Nav>
           {IsAdmin ? (
             <>
-              <UserAdmin logout={() => [setIsAdmin(false), navigate("/")]} />
+              <UserAdmin logout={() => [setIsAdmin(false), setIsUser(false), navigate("/")]} />
             </>
           ) : IsUser ? (
             <>
@@ -51,6 +51,8 @@ const Header = (props) => {
         hideModal={() => setModalLogin(false)}
         toRegister={() => [setModalLogin(false), setModalRegister(true)]}
         setIsAdmin={setIsAdmin}
+        IsAdmin={IsAdmin}
+        IsUser={IsUser}
         setIsUser={setIsUser}
         linkToUser={() => navigate("/profile")}
         linkToAdmin={() => navigate("/list-income")}

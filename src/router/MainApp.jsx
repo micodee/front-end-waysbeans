@@ -35,7 +35,7 @@ const MainApp = () => {
       <Router>
         <Header IsUser={IsUser} setIsUser={setIsUser} IsAdmin={IsAdmin} setIsAdmin={setIsAdmin} cart={cart} Users={Users} SetUsers={SetUsers} />
         <Routes>
-          <Route path="/" element={<Home Products={Products} />} />
+          <Route path="/"  element={<Home Products={Products} />} />
           <Route path="/detail/:id" element={<ProductDetail Products={Products} />} />
 
           <Route path="/" element={<RouteUser IsUser={IsUser}/>}>
