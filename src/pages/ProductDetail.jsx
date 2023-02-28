@@ -1,12 +1,21 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ProductDetail = (props) => {
-  const { Products } = props
+  const { Products, IsUser } = props
+  const navigate = useNavigate()
 
   const params = useParams();
   let Product = Products.filter(Product => Product.id === parseInt(params.id));
   Product = Product[0];
+
+  const addCart = () => {
+    if (IsUser) {
+      navigate('/')
+    } else {
+      alert("harus login")
+    }
+  }
 
   return (
    <Container className="detail col-9">
@@ -24,7 +33,7 @@ const ProductDetail = (props) => {
          {Product.description}
          </p>
          <p style={{ textAlign: "right", fontWeight: "900", fontSize: "24px", color: "#974A4A", marginBottom: "3rem", marginTop: "2rem" }}>Rp.{Product.price}</p>
-         <Button className="col-12" style={{ backgroundColor: "#613D2B", color: "#fff", border: "none" }}>Add Cart</Button>{' '}
+         <Button onClick={addCart} className="col-12" style={{ backgroundColor: "#613D2B", color: "#fff", border: "none" }}>Add Cart</Button>{' '}
        </div>
      </Col>
    </Row>
