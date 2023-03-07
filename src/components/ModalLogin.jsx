@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
+import Swal from 'sweetalert2'
+
 
 const ModalLogin = (props) => {
   const {showModal, hideModal, toRegister, Users} = props
@@ -25,6 +27,13 @@ const ModalLogin = (props) => {
         props.setIsUser(true)
         props.setIsAdmin(User.isAdmin)
         props.linkToAdmin()
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'You Are Logged In',
+          showConfirmButton: false,
+          timer: 1500
+        })
       } else {
         setErrorMessage("Invalid password")
       }
