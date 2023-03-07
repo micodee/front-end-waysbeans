@@ -7,6 +7,7 @@ import dataTransaction from "../assets/json/transaction.json"
 import dataUsers from "../assets/json/users.json"
 import RouteAdmin from "./RouteAdmin";
 import RouteUser from "./RouteUser";
+//
 
 const MainApp = () => {
   //state global product
@@ -36,7 +37,7 @@ const MainApp = () => {
         <Header IsUser={IsUser} setIsUser={setIsUser} IsAdmin={IsAdmin} setIsAdmin={setIsAdmin} cart={cart} Users={Users} SetUsers={SetUsers} />
         <Routes>
           <Route path="/"  element={<Home Products={Products} />} />
-          <Route path="/detail/:id" element={<ProductDetail Products={Products} />} />
+          <Route path="/detail/:id" element={<ProductDetail Products={Products} IsUser={IsUser} />} />
 
           <Route path="/" element={<RouteUser IsUser={IsUser}/>}>
             <Route path="/cart" element={<Cart Products={Products} SetProducts={SetProducts} Transactions={Transactions} SetTransactions={SetTransactions} cart={cart} setCart={setCart} />} />
